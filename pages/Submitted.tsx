@@ -1,6 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router';
-import Head from 'next/head'; // Import the Head component
 
 function Submitted() {
   const router = useRouter(); // Import the useRouter hook
@@ -15,9 +14,6 @@ function Submitted() {
 
   return (
     <div>
-      <Head>
-          <script src="https://cdn.tailwindcss.com/3.3.2"></script>
-    </Head>
     <body className="bg-black flex justify-center items-center w-screen h-screen">
       <div className="relative w-6/12">
         <div className="mt-20 flex flex-col items-center w-full">

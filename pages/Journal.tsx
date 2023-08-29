@@ -13,7 +13,7 @@ function Journal() {
             ))}
         </div>
     </body>
-      )
+    )
 }
 
 export default Journal
