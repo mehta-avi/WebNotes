@@ -9,12 +9,11 @@ function Submitted() {
   };
 
   const handleSubmitNewNote = () => {
-    router.push('/Home');
+    router.push('/');
 };
 
   return (
-    <div>
-    <body className="bg-black flex justify-center items-center w-screen h-screen">
+    <div className="bg-black flex justify-center items-center w-screen h-screen">
       <div className="relative w-6/12">
         <div className="mt-20 flex flex-col items-center w-full">
           <h1 className="text-[#FF8B00] text-4xl my-20">Submitted</h1>
@@ -29,9 +28,7 @@ function Submitted() {
         </div>
       </div>
       <div className="opacity-40 h-72 w-6/12 bg-footer-gradient  absolute bottom-0"></div>
-    </body>
-    </div>
-    
+    </div>    
   )
 }
 

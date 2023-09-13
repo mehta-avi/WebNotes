@@ -14,12 +14,34 @@ function Home({user}:any) {
     setText(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (text.length > 0) {
-      console.log('Submitting:', text);
-      router.push('/Submitted');
+      try{
+        const response = await fetch('/api/add-note', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: user.sub, // Assuming you have user ID available
+            input_text: text,
+            input_number: 42, // Adjust as needed
+          }),
+        });
+
+        if (response.ok) {
+          console.log('Note submitted successfully.');
+          console.log('id is ' + user.sub)
+          router.push('/Submitted');
+        } else {
+          console.error('Failed to submit note.');
+        }
+      } catch (error) {
+        console.error('Error while submitting note:', error);
+      }
     }
   };
+      
     return (
     <div>
       <Head>
@@ -31,7 +53,7 @@ function Home({user}:any) {
         />
       </Head>
 
-      <body className=' items-center flex-auto justify-center w-screen lg:px-32'>
+      <div className='items-center flex-auto justify-center w-screen lg:px-32'>
         <div className="flex justify-center">
           <div className="relative w-6/12 h-12 max-h-12">
             <div className='flex flex-col w-full h-screen'>
@@ -57,7 +79,7 @@ function Home({user}:any) {
         </div>
       </div>
       </div>  
-    </body>
+    </div>
   </div>
 )}
 

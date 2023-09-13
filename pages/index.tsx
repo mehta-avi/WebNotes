@@ -25,7 +25,7 @@ function Index() {
             <button onClick={handleLogoutButtonClick} className="hover:bg-orange-500 text-opacity-50 bg-[#111111] text-white py-2 px-5 rounded-md">Logout</button>
           </div>
         </div>
-        <Home />
+        <Home user={user}/>
       </body>
 
     );
