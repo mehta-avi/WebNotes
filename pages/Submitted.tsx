@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router';
 
 function Submitted() {
-  const router = useRouter(); // Import the useRouter hook
+  const router = useRouter();
 
   const handleSubmitSeeAll = () => {
       router.push('/Journal');

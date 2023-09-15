@@ -5,7 +5,7 @@ import { useUser } from "@auth0/nextjs-auth0/client"
 function NotesForDay() {
   const { user } = useUser();
   const router = useRouter();
-  const { timestamp } = router.query; // Access query parameters from the URL
+  const { timestamp } = router.query;
  
   const formatTimestamp = (timestamp:any) => {
   const date = new Date(timestamp);
@@ -23,7 +23,6 @@ function NotesForDay() {
     router.push('/');
   };
 
-
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ function NotesForDay() {
           const data = await response.json();
         //   console.log('Fetched notes data:', data.userNotes.rows);
           const inputTexts = data.userNotes.rows.map((entry:any) => entry.input_text);
-          setNotes(inputTexts); // Assuming the response contains an array of notes
+          setNotes(inputTexts);
         } else {
           console.error('Failed to fetch notes');
         }
