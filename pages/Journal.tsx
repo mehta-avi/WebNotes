@@ -17,13 +17,20 @@ function Journal() {
     // search(newSearchText); 
   };
 
+  const formatTimestamp = (timestamp:any) => {
+    const date = new Date(timestamp);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${month}/${day}`;
+    };
+
   const search = (query:any) => {
     if (query !== '') {
       fetch(`/api/search?user_id=${user?.sub}&search_text=${query}`)
         .then((response) => response.json())
         .then((data) => {
           console.log('Fetch response:', data.userNotes.rows);
-          setSearchResults(data.userNotes);
+          setSearchResults(data.userNotes.rows);
         })
         .catch((error) => {
           console.error('Error fetching search results:', error);
@@ -48,6 +55,7 @@ function Journal() {
           />
         </div>
       </div>
+      <div className="relative">
       <div
         className={`max-w-6xl mx-auto py-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 lg:max-w-screen-xl ${
           showCalendarCards ? 'transition-opacity opacity-100 scale-100' : 'opacity-0 scale-95 transition-all'}`}>
@@ -67,19 +75,21 @@ function Journal() {
           </div>
         ))}
       </div>
-      
+      </div>
+
       {searchResults.length > 0 && (
         <div className="overlay">
-          <div className="max-w-6xl mx-auto py-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 lg:max-w-screen-xl">
+          <div className="max-w-6xl mx-auto my-auto grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 lg:max-w-screen-xl">
             {searchResults.map((result:any, index) => (
-              <div key={index} className='bg-[#222222] rounded-sm w-44 h-40 shadow-md px-1 transition-all duration-300 transform hover:bg-gray-600 hover:scale-105'>
-                <p className='text-[#FF8B00] text-right'>{result.timestamp} </p>
-                <p className='text-white'>{result.input_text}</p>
+              <div key={index} className='bg-[#222222] rounded-sm w-44 h-40 shadow-md px-1 transition-all duration-300 transform hover:scale-105'>
+                <p className='text-[#FF8B00] text-right'>{formatTimestamp(result.timestamp)} </p>
+                <p className='text-[#7d7878]'>{result.input_text}</p>
               </div>
             ))}
           </div>
         </div>
       )}
+      
     </div>
   );
 }
